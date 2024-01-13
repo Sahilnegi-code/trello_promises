@@ -1,12 +1,6 @@
 
-const testCallBack2 =  require('../callback2');
+const callBack2 =  require('../callback2');
+const testCallBack2 = callBack2;
+testCallBack2( "mcu453ed"  ); 
 
-testCallBack2( "mcu453ed"  ,  ( val ) => {
-    if( val === false){
-        console.log( 'Empty Data' );
-    }
-    else{
-        console.log(val);
-    }
-
-} ); 
+module.exports = callBack2;

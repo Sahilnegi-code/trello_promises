@@ -1,8 +1,22 @@
-const {board} = require('./Test/data')
- const callback1 = (  id ,cb) =>{
+const { board } = require("./Test/data");
+const callback1 = (id) => {
+  let informId = board.filter((boardKey) => boardKey.id === id);
 
-    const informId = board.filter(( boardKey  ) => boardKey.id === id );
-    cb( informId[0] || null );
-return informId[0];
- }
- module.exports = callback1;
+  const resultOfPromise = new Promise((res, rej) => {
+    if (informId) {
+      res(informId);
+    } else {
+      rej(null);
+    }
+  });
+  resultOfPromise
+    .then((val) => {
+      console.log(val);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  return informId;
+};
+module.exports = callback1;

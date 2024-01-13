@@ -54,7 +54,7 @@ const lists_1 = {
         }
     ]
 }
-
+// qws , jwk
 const cards  = {
     "qwsa221": [
         {

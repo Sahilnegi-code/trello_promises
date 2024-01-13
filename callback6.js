@@ -1,24 +1,14 @@
-const { cards ,lists_1 } = require("./Test/data");
+const { cards, lists_1 } = require("./Test/data");
 
-
-function callBack5(cb) {
+function callBack6() {
   let temp = [];
   setTimeout(() => {
     const callback1 = require("./Test/testCallback1");
 
-    callback1("mcu453ed", (val) => {
-      if (val === false) {
-        console.log("Empty Data");
-      }
-    });
+    callback1("mcu453ed");
     const callback2 = require("./callback2");
 
-    const thanosLists = callback2("mcu453ed", (val) => {
-      if (val === false) {
-        console.log("Empty Data");
-      }
-    });
-    console.log(thanosLists);
+    const thanosLists = callback2("mcu453ed");
 
     let obj = thanosLists.filter((curr, index) => {
       return curr.name === "Mind" || curr.name === "Space";
@@ -26,29 +16,29 @@ function callBack5(cb) {
 
     let id = [];
 
-    Object.values((lists_1)).forEach((arr) => {
-        arr.forEach((element)=>{
-            id.push(element.id);
-        })
-    })
+    Object.values(lists_1).forEach((arr) => {
+      arr.forEach((element) => {
+        id.push(element.id);
+      });
+    });
 
-    let resultObj = []; 
-      id.forEach( (idVal)=>{
-
-        if( cards.hasOwnProperty(idVal)  ){
-            let cardsValue = cards[idVal]; 
-            cardsValue.forEach((objectInform)=>{
-                resultObj.push(objectInform);
-            });
-
+    let resultObj = [];
+    let resultObjPromise = new Promise((res, rej) => {
+      id.forEach((idVal) => {
+        if (cards.hasOwnProperty(idVal)) {
+          let cardsValue = cards[idVal];
+          cardsValue.forEach((objectInform) => {
+            resultObj.push(objectInform);
+          });
         }
+      });
+      res(resultObj);
+    });
 
-      } )  
-        
-      
-;
-
-   cb(resultObj)
+    resultObjPromise.then((val) => {
+      console.log(val);
+    });
   }, 3000);
 }
-module.exports = callBack5;
+callBack6();
+module.exports = callBack6;
